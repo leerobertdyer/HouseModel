@@ -80,7 +80,11 @@ export default function TeleportationSurface({
 
 	function setTeleportIntersectionPoint(intersection: XRInteractionEvent['intersection']) {
 		if (intersection !== undefined) {
-			const adjustedPointForPlayerHeight = new Vector3(intersection.point.x, intersection.point.y + 1, intersection.point.z)
+			const adjustedPointForPlayerHeight = new Vector3(
+				intersection.point.x,
+				intersection.point.y + 1,
+				intersection.point.z
+			)
 			teleportRef.current = adjustedPointForPlayerHeight
 			const adjustedMarkerGroupPosition = new Vector3(
 				teleportRef.current.x,

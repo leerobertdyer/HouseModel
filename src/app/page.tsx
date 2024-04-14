@@ -180,7 +180,7 @@ export default function RootPage() {
 						<ambientLight intensity={2} />
 
 						{/* start 3D space */}
-								<HouseModel />
+						<HouseModel />
 						<group>
 							<Skybox positionYOffset={floorPositionYOffset} />
 							<TeleportationSurface rightStickForward={rightStickForward}>

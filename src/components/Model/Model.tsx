@@ -42,8 +42,8 @@ export default function HouseModel() {
 			// 'Art_Deco_Tile_06b_baseColor',
 			// 'Art_Deco_Mosaic_baseColor',
 			'sehpa_mermer__marble_baseColor',
-            'Concrete_Stack_baseColor',
-            'Concrete_Stack',
+			'Concrete_Stack_baseColor',
+			'Concrete_Stack',
 			'148_dark_parquet_flooring_texture-seamless_baseColor',
 			'148_dark_parquet_flooring_texture-seamless_0_baseColor',
 			'Grass_baseColor',
@@ -67,12 +67,12 @@ export default function HouseModel() {
 					child.material instanceof MeshPhongMaterial
 				) {
 					if (child.material.map) {
-                        // console.log(child.material.map.name)
+						// console.log(child.material.map.name)
 						if (materialNames.includes(child.material.map.name)) {
 							nextTeleportMeshes.push(child as Mesh)
 						} else {
-                            nextNonTeleportMeshes.push(child as Mesh)
-                        }
+							nextNonTeleportMeshes.push(child as Mesh)
+						}
 					} else {
 						nextNonTeleportMeshes.push(child as Mesh)
 					}

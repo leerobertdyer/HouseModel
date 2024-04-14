@@ -17,4 +17,3 @@ export const handleFlickRight =
 	({ playerRotation, setPlayerRotation }: HandleFlicks) =>
 	() =>
 		setPlayerRotation(playerRotation - rotationSnapAngle)
-

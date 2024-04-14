@@ -15,7 +15,13 @@ export default function Floor(props: PropsDefinition) {
 
 	return (
 		<>
-			<group position={[0, props.positionYOffset * -1, 0]}>
+			<group
+				position={[
+					0,
+					props.positionYOffset * -1,
+					0,
+				]}
+			>
 				<Plane
 					args={[floorWidth, floorHeight]}
 					rotation={new Euler(degToRad(-90), 0, 0)}

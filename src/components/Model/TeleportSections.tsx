@@ -4,12 +4,12 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 
 export default function TeleportSections() {
-    const [sections, setSections] = useState<Mesh[]>([])
+	const [sections, setSections] = useState<Mesh[]>([])
 
-    useEffect(() => {
-        setSections(getTeleportMeshes())
-        console.log('teleport meshes: ', getTeleportMeshes());
-    }, [])
+	useEffect(() => {
+		setSections(getTeleportMeshes())
+		console.log('teleport meshes: ', getTeleportMeshes())
+	}, [])
 
 	return (
 		<group
