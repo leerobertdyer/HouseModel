@@ -9,7 +9,7 @@
 
 # models
 # /House/*
-# *.glb
+*.glb
 
 # testing
 /coverage
