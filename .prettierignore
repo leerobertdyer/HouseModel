@@ -1,0 +1,7 @@
+README.md
+.next
+assets
+node_modules
+public
+*.yml
+*.yaml

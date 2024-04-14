@@ -1,0 +1,23 @@
+{
+	"plugins": ["prettier-plugin-multiline-arrays"],
+	"bracketSameLine": false,
+	"printWidth": 120,
+	"semi": false,
+	"singleAttributePerLine": true,
+	"singleQuote": true,
+	"tabWidth": 4,
+	"useTabs": true,
+	"trailingComma": "es5",
+	"multilineArraysWrapThreshold": 2,
+	"overrides": [
+		{
+			"files": [
+				"**/*.css",
+				"**/*.html"
+			],
+			"options": {
+				"singleQuote": false
+			}
+		}
+	]
+}
