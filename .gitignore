@@ -8,8 +8,8 @@
 
 
 # models
-/House/*
-*.glb
+# /House/*
+# *.glb
 
 # testing
 /coverage
