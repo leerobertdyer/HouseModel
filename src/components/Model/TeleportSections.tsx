@@ -1,5 +1,5 @@
 import { Mesh } from 'three'
-import { getTeleportMeshes } from './Model'
+import { getTeleportMeshes } from './HouseModel'
 import { useEffect } from 'react'
 import { useState } from 'react'
 

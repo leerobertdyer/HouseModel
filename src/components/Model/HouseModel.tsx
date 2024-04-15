@@ -19,7 +19,7 @@ const nextNonTeleportMeshes: Mesh[] = []
 export default function HouseModel() {
 	const [nonTeleportMeshes, setNonTeleportMeshes] = useState<Mesh[]>([])
 
-	const { scene }: GLTF = useGLTF('./House/House-v1.glb') as GLTF
+	const { scene }: GLTF = useGLTF('./Models/house.glb') as GLTF
 	useEffect(() => {
 		const materialNames = house1TeleportMaterialNames
 		scene.traverse((child: Object3D) => {

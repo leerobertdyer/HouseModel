@@ -13,8 +13,9 @@ import TeleportationSurface from '~/components/TeleportationSurface/Teleportatio
 import Locomotion from '~/components/Locomotion/Locomotion'
 import DebugVR from '~/components/DebugVR/DebugVR'
 import { handleFlickLeft, handleFlickRight } from '~/utils/inputHandlers'
-import HouseModel from '~/components/Model/Model'
+import HouseModel from '~/components/Model/HouseModel'
 import TeleportSections from '~/components/Model/TeleportSections'
+import CarModel from '~/components/Model/CarModel'
 
 export default function RootPage() {
 	// the distance between the middlepoint of the glovebox workstation and the floor
@@ -137,80 +138,79 @@ export default function RootPage() {
 			`}
 		>
 			{/* start 3D scene */}
-			<Suspense>
-				<Canvas
-					className={`
+			<Canvas
+				className={`
 						h-full
 						w-full
 						cursor-grab
 						bg-black
 					`}
-				>
-					<XR onSessionEnd={() => handleOnSessionEnd()}>
-						{/* create a default camera for the OrbitControls to leverage */}
-						<PerspectiveCamera
-							// force a specific position and rotation to prevent undesirable
-							// changes to camera orientation after exiting immersion
-							position={new Vector3(0, 1, 2)}
-							rotation={new Euler(0, 0, 0)}
-							// the field of view (fov) must be set to 100, otherwise the 'fov' seen before
-							// entering immersion will look different than the 'fov' seen after exiting immersion
-							fov={100}
-							aspect={1}
-							makeDefault
-						/>
-						<OrbitControls
-							enablePan={false}
-							// set the min and max polar angle (vertical height) for the camera
-							minPolarAngle={degToRad(0)}
-							maxPolarAngle={degToRad(90)}
-							// set the min and max zoom distances for the camera
-							minDistance={1}
-							maxDistance={3}
-						/>
-						<VrControllers
-							onLeftStickFlickLeft={handleFlickLeft({ playerRotation, setPlayerRotation })}
-							onLeftStickFlickRight={handleFlickRight({ playerRotation, setPlayerRotation })}
-							onRightStickFlickLeft={handleFlickLeft({ playerRotation, setPlayerRotation })}
-							onRightStickFlickRight={handleFlickRight({ playerRotation, setPlayerRotation })}
-							onRightStickForward={(forward) => setRightstickForward(forward)}
-						/>
-						<Locomotion playerRotation={playerRotation} />
-						<Controllers />
-						<ambientLight intensity={2} />
+			>
+				<XR onSessionEnd={() => handleOnSessionEnd()}>
+					{/* create a default camera for the OrbitControls to leverage */}
+					<PerspectiveCamera
+						// force a specific position and rotation to prevent undesirable
+						// changes to camera orientation after exiting immersion
+						position={new Vector3(0, 1, 2)}
+						rotation={new Euler(0, 0, 0)}
+						// the field of view (fov) must be set to 100, otherwise the 'fov' seen before
+						// entering immersion will look different than the 'fov' seen after exiting immersion
+						fov={100}
+						aspect={1}
+						makeDefault
+					/>
+					<OrbitControls
+						enablePan={false}
+						// set the min and max polar angle (vertical height) for the camera
+						minPolarAngle={degToRad(0)}
+						maxPolarAngle={degToRad(90)}
+						// set the min and max zoom distances for the camera
+						minDistance={1}
+						maxDistance={3}
+					/>
+					<VrControllers
+						onLeftStickFlickLeft={handleFlickLeft({ playerRotation, setPlayerRotation })}
+						onLeftStickFlickRight={handleFlickRight({ playerRotation, setPlayerRotation })}
+						onRightStickForward={(forward) => setRightstickForward(forward)}
+					/>
+					<Locomotion playerRotation={playerRotation} />
+					<Controllers />
+					<ambientLight intensity={2} />
 
-						{/* start 3D space */}
+					<Suspense fallback={null}>
+						<CarModel />
+					</Suspense>
+
+					<Suspense fallback={null}>
 						<HouseModel />
-						<group>
-							<Skybox positionYOffset={floorPositionYOffset} />
-							<TeleportationSurface rightStickForward={rightStickForward}>
-								<TeleportSections />
-								<Floor positionYOffset={floorPositionYOffset} />
-							</TeleportationSurface>
-						</group>
-						{/* end 3D space */}
+					</Suspense>
 
-						{/* start 3D user interface */}
-						{isImmersed ? (
-							<>
-								{/* start wrist UI menu */}
-								<DebugVR
-									isXrSupported={isXrSupported}
-									isLoadingImmersive={isLoadingImmersive}
-									handleExitVrClicked={handleExitVrClicked}
-								/>
-								{/* end wrist UI menu */}
-							</>
-						) : null}
+					<group>
+						<Skybox positionYOffset={floorPositionYOffset} />
+						<TeleportationSurface rightStickForward={rightStickForward}>
+							<TeleportSections />
+							<Floor positionYOffset={floorPositionYOffset} />
+						</TeleportationSurface>
+					</group>
+					{/* end 3D space */}
 
-						{/* end 3D user interface */}
-					</XR>
-				</Canvas>
-			</Suspense>
+					{/* start 3D user interface */}
+					{isImmersed ? (
+						<>
+							{/* start wrist UI menu */}
+							<DebugVR
+								isXrSupported={isXrSupported}
+								isLoadingImmersive={isLoadingImmersive}
+								handleExitVrClicked={handleExitVrClicked}
+							/>
+							{/* end wrist UI menu */}
+						</>
+					) : null}
+
+					{/* end 3D user interface */}
+				</XR>
+			</Canvas>
 			{/* end 3D scene */}
-
-			{/* loading indicator */}
-			<Loader />
 
 			{/* start 2D user interface */}
 			<>
