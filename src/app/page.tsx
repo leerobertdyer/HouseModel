@@ -1,5 +1,5 @@
 'use client'
-import { Loader, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Controllers, XR, startSession, stopSession } from '@react-three/xr'
 import { Suspense, useEffect, useState } from 'react'
@@ -16,6 +16,7 @@ import { handleFlickLeft, handleFlickRight } from '~/utils/inputHandlers'
 import HouseModel from '~/components/Model/HouseModel'
 import TeleportSections from '~/components/Model/TeleportSections'
 import CarModel from '~/components/Model/CarModel'
+import AframeModel from '~/components/Model/AframeModel'
 
 export default function RootPage() {
 	// the distance between the middlepoint of the glovebox workstation and the floor
@@ -166,7 +167,7 @@ export default function RootPage() {
 						maxPolarAngle={degToRad(90)}
 						// set the min and max zoom distances for the camera
 						minDistance={1}
-						maxDistance={3}
+						maxDistance={300}
 					/>
 					<VrControllers
 						onLeftStickFlickLeft={handleFlickLeft({ playerRotation, setPlayerRotation })}
@@ -176,18 +177,18 @@ export default function RootPage() {
 					<Locomotion playerRotation={playerRotation} />
 					<Controllers />
 					<ambientLight intensity={2} />
-
 					<Suspense fallback={null}>
 						<CarModel />
 					</Suspense>
 
-					<Suspense fallback={null}>
+					 <Suspense fallback={null}>
 						<HouseModel />
-					</Suspense>
+					</Suspense> 
 
 					<group>
-						<Skybox positionYOffset={floorPositionYOffset} />
+						<Skybox positionYOffset={floorPositionYOffset} /> 
 						<TeleportationSurface rightStickForward={rightStickForward}>
+							<AframeModel />
 							<TeleportSections />
 							<Floor positionYOffset={floorPositionYOffset} />
 						</TeleportationSurface>

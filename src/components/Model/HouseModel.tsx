@@ -53,18 +53,16 @@ export default function HouseModel() {
 		<group
 			scale={0.03}
 			position={[
-				-20,
+				20,
 				-1.35,
-				-10,
+				10,
 			]}
 			rotation={[
 				Math.PI * -0.5,
 				0,
-				// Math.PI * -2,
-				0,
+				Math.PI * 1,
 			]}
 		>
-			{/* <primitive object={scene} /> */}
 			{nonTeleportMeshes.map((nonTeleportMesh, index) => (
 				<primitive
 					key={index}
@@ -75,15 +73,6 @@ export default function HouseModel() {
 				/>
 			))}
 
-			{/* {teleportMeshes.map((teleportMesh, index) => (
-				<primitive
-					key={index}
-					object={teleportMesh}
-					position={teleportMesh.position}
-					rotation={teleportMesh.rotation}
-					scale={teleportMesh.scale}
-				/>
-			))} */}
 		</group>
 	)
 }
