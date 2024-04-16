@@ -21,6 +21,7 @@ const defaultBeamCurveDefinition: BeamCurveDefinition = {
 
 const defaultTeleportationDistance = 10
 const defaultTeleportationBoundary = 50
+const playerHeight = 1
 
 export default function TeleportationSurface({
 	teleportationDistance = defaultTeleportationDistance,
@@ -82,16 +83,16 @@ export default function TeleportationSurface({
 		if (intersection !== undefined) {
 			const adjustedPointForPlayerHeight = new Vector3(
 				intersection.point.x,
-				intersection.point.y + 1,
+				intersection.point.y + playerHeight,
 				intersection.point.z
 			)
 			teleportRef.current = adjustedPointForPlayerHeight
-			const adjustedMarkerGroupPosition = new Vector3(
+			const adjustedTeleportCirclePosition = new Vector3(
 				teleportRef.current.x,
-				teleportRef.current.y + beamCurveOffset - 1,
+				teleportRef.current.y + beamCurveOffset - playerHeight,
 				teleportRef.current.z
 			)
-			teleportCircleRef.current.position.copy(adjustedMarkerGroupPosition)
+			teleportCircleRef.current.position.copy(adjustedTeleportCirclePosition)
 		}
 	}
 
